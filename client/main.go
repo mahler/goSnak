@@ -12,7 +12,7 @@ import (
 	"golang.org/x/net/websocket"
 )
 
-type Message struct {
+type message struct {
 	Text string `json:"text"`
 }
 
@@ -31,7 +31,7 @@ func main() {
 	defer ws.Close()
 
 	// receive
-	var m Message
+	var m message
 	go func() {
 		for {
 			err := websocket.JSON.Receive(ws, &m)
@@ -50,7 +50,7 @@ func main() {
 		if text == "" {
 			continue
 		}
-		m := Message{
+		m := message{
 			Text: text,
 		}
 		err = websocket.JSON.Send(ws, m)
